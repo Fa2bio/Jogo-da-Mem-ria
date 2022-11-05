@@ -8,18 +8,18 @@ from pygame.locals import *
 clock = pygame.time.Clock()
 pygame.init()
 
-#inicia o loop
+#start the loop
 
 running = True
 
-#numero de cartas, criando a janela e os placares zerados
+#number of cards, creating the window and the zeroed scores
 
 N_CARDS = 32
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 CARD_HEIGHT = 122
 CARD_WIDTH = 167
-p_turn = 0 #0 para p1, 1 para p2 #turno iniciando em 0
+p_turn = 0 #0 for p1, 1 for p2 #turn starting at 0
 p1_score = 0
 p2_score = 0
 
@@ -28,7 +28,7 @@ screen = pygame.display.get_surface()
 background = pygame.Surface(screen.get_size())
 background = background.convert()
 background.fill((255, 255, 255))
-pygame.display.set_caption("Jogo da memoria")
+pygame.display.set_caption("Memory Game")
 
 #recebendo os seletores
 
@@ -71,7 +71,7 @@ class Selector:
                 if (self.match[i][k] == 1) | (self.selected_check[i][k] == 1):
                     screen.blit(self.selected, (22 + (CARD_WIDTH + 25)*i, 22 + (CARD_HEIGHT + 25)*k))
 
-#input teclado
+#input keyboard
 
     def button(self):
         global p_turn
@@ -102,7 +102,7 @@ class Selector:
                     x = selected_ones()
                     self.check(x[0][0], x[0][1], x[1][0], x[1][1])
 
-#contador placar e iniciador de turno
+#score counter and turn initiator
 
     def check(self, i, k, x, y):
         global p_turn, p1_score, p2_score
@@ -126,7 +126,8 @@ class Selector:
         for i in range(4):
             for k in range(4):
                 x[i][k] = 0
-#escolha das cartas
+
+#choice of cards
 
 class Card:
     cards = []
@@ -135,15 +136,15 @@ class Card:
 
     hash_map = [[0,0,0,0], [0,0,0,0],[0,0,0,0],[0,0,0,0]]
 
-#abre as cartas
+#open the cards
 
     def load(self, n):
         for i in range(n):
-            self.cards += [pygame.image.load(os.path.join("coisas", "WWK", str(i) + ".jpg"))]
+            self.cards += [pygame.image.load(os.path.join("stuff", "WWK", str(i) + ".jpg"))]
         for i in range (5):
-            self.back += [pygame.image.load(os.path.join("coisas", "WWK", "back" + str(i) + ".jpg"))]
+            self.back += [pygame.image.load(os.path.join("stuff", "WWK", "back" + str(i) + ".jpg"))]
 
-#adiciona as cartas de 0-31
+#add cards 0-31
 
     def choose(self):
 
@@ -208,7 +209,7 @@ selector = Selector()
 
 font = pygame.font.Font(None, 30)
 
-#placar
+#scoreboard
 
 def score_blit():
     global p1_score, p2_score, p_turn
